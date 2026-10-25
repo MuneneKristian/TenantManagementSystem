@@ -1,3 +1,4 @@
+
 package com.example.tenantmanagementsystem
 
 import android.content.Intent
@@ -40,6 +41,10 @@ class LoginActivity : AppCompatActivity() {
             }
 
             val intent = Intent(this, MainActivity::class.java)
+
+            // Pass the logged-in user's email to MainActivity
+            intent.putExtra("EMAIL", email)
+
             startActivity(intent)
             finish()
         }
