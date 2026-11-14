@@ -56,7 +56,31 @@ class MainActivity : AppCompatActivity() {
             appBarConfiguration
         )
 
-        binding.navView.setupWithNavController(navController)
+        binding.navView.setNavigationItemSelectedListener { item ->
+            val handled = when (item.itemId) {
+                R.id.dashboardFragment -> {
+                    navController.popBackStack(R.id.dashboardFragment, false)
+                }
+
+                R.id.addTenantFragment -> {
+                    navController.navigate(R.id.addTenantFragment)
+                    true
+                }
+
+                R.id.viewTenantsFragment -> {
+                    navController.navigate(R.id.viewTenantsFragment)
+                    true
+                }
+
+                else -> false
+            }
+
+            if (handled) {
+                binding.drawerLayout.closeDrawers()
+            }
+
+            handled
+        }
 
         // Display the logged-in user's email
         val email = intent.getStringExtra("EMAIL")
